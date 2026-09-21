@@ -16,5 +16,7 @@ Rules:
 6. File actions must specify a file path.
 7. run_command must specify a command.
 8. Keep the plan minimal and directly related to the task.
-9. The plan will later be executed by a separate executor.
+9. For run_command steps, include expected_output when the task specifies a result or value that can be verified.
+
+The plan will later be executed by a separate executor.
 """

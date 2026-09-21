@@ -37,6 +37,10 @@ class PlanStep(BaseModel):
         default=None,
         description="Command to execute"
     )
+    expected_output: Optional[str] = Field(
+        default=None,
+        description="Expected stdout value used for evidence verification"
+    )
 
 
 class ExecutionPlan(BaseModel):
