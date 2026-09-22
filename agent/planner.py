@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 from google import genai
 from google.genai import types
 
-from agent.prompts import PLANNER_PROMPT
+from agent.prompts import PLANNER_PROMPT, REPAIR_PROMPT
 
 
 load_dotenv()
@@ -78,6 +78,44 @@ USER TASK:
 
     return ExecutionPlan.model_validate_json(response.text)
 
+
+
+def create_repair_plan(
+    user_task: str,
+    failed_step: PlanStep,
+    failure_reason: str,
+    actual_output: str,
+) -> ExecutionPlan:
+
+    prompt = f"""
+{REPAIR_PROMPT}
+
+ORIGINAL USER TASK:
+{user_task}
+
+FAILED STEP:
+{failed_step.model_dump_json(indent=2)}
+
+FAILURE REASON:
+{failure_reason}
+
+ACTUAL OUTPUT:
+{actual_output}
+
+Create a minimal repair plan that addresses the failure.
+Return only the structured execution plan.
+"""
+
+    response = client.models.generate_content(
+        model="gemini-3.5-flash-lite",
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            response_mime_type="application/json",
+            response_schema=ExecutionPlan,
+        ),
+    )
+
+    return ExecutionPlan.model_validate_json(response.text)
 
 if __name__ == "__main__":
 
