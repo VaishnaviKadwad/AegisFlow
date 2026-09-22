@@ -1,0 +1,91 @@
+{
+  "mission_id": "AF-1790054852-998d8b",
+  "objective": "Create Fibonacci and verify fib(30)=832040",
+  "domain": "general",
+  "started_at": "2026-09-22T10:57:32",
+  "finished_at": "2026-09-22T10:57:32",
+  "success": true,
+  "steps": [
+    {
+      "step": {
+        "id": "S1",
+        "action": "create_file",
+        "description": "Write fibonacci.py",
+        "file": "fibonacci.py",
+        "content": "def fibonacci(n):\n    if n <= 1:\n        return n\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b\n\nif __name__ == \"__main__\":\n    print(fibonacci(30))\n",
+        "command": null,
+        "evidence": {
+          "kind": "none",
+          "expected": null,
+          "threshold": null,
+          "metric_key": null,
+          "tolerance": 0.0
+        }
+      },
+      "status": "verified",
+      "attempts": [
+        {
+          "attempt": 1,
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration": 0.0,
+          "verified": true,
+          "reason": "Exit code 0 \u2014 step accepted."
+        }
+      ],
+      "final_evidence": {
+        "step_id": "S1",
+        "attempt": 1,
+        "verified": true,
+        "reason": "Exit code 0 \u2014 step accepted.",
+        "kind": "none",
+        "actual": "",
+        "expected_summary": ""
+      },
+      "healed": false
+    },
+    {
+      "step": {
+        "id": "S2",
+        "action": "run_python",
+        "description": "Run fibonacci.py and verify output",
+        "file": "fibonacci.py",
+        "content": null,
+        "command": "python fibonacci.py",
+        "evidence": {
+          "kind": "exact",
+          "expected": "832040",
+          "threshold": null,
+          "metric_key": null,
+          "tolerance": 0.0
+        }
+      },
+      "status": "verified",
+      "attempts": [
+        {
+          "attempt": 1,
+          "exit_code": 0,
+          "stdout": "832040\n",
+          "stderr": "",
+          "duration": 0.19485735893249512,
+          "verified": true,
+          "reason": "Exact match."
+        }
+      ],
+      "final_evidence": {
+        "step_id": "S2",
+        "attempt": 1,
+        "verified": true,
+        "reason": "Exact match.",
+        "kind": "exact",
+        "actual": "832040",
+        "expected_summary": "832040"
+      },
+      "healed": false
+    }
+  ],
+  "ledger_hash": "57ff190c7444c3a415d73a25b732294b70b208d5ec055c42e186870f6507300c",
+  "security_blocks": 0,
+  "heal_count": 0
+}

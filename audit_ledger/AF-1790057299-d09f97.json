@@ -1,0 +1,91 @@
+{
+  "mission_id": "AF-1790057299-d09f97",
+  "objective": "Create a script that sorts a list of numbers and prints the sorted list",
+  "domain": "general",
+  "started_at": "2026-09-22T11:38:19",
+  "finished_at": "2026-09-22T11:38:19",
+  "success": true,
+  "steps": [
+    {
+      "step": {
+        "id": "S1",
+        "action": "create_file",
+        "description": "Create a Python script that sorts a list of numbers and prints the result",
+        "file": "workspace/sort_numbers.py",
+        "content": "numbers = [42, 12, 89, 5, 23, 1]; numbers.sort(); print(numbers)",
+        "command": null,
+        "evidence": {
+          "kind": "none",
+          "expected": null,
+          "threshold": null,
+          "metric_key": null,
+          "tolerance": 0.0
+        }
+      },
+      "status": "verified",
+      "attempts": [
+        {
+          "attempt": 1,
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration": 0.0,
+          "verified": true,
+          "reason": "Exit code 0 \u2014 step accepted."
+        }
+      ],
+      "final_evidence": {
+        "step_id": "S1",
+        "attempt": 1,
+        "verified": true,
+        "reason": "Exit code 0 \u2014 step accepted.",
+        "kind": "none",
+        "actual": "",
+        "expected_summary": ""
+      },
+      "healed": false
+    },
+    {
+      "step": {
+        "id": "S2",
+        "action": "run_python",
+        "description": "Execute the sorting script and verify the sorted output",
+        "file": "workspace/sort_numbers.py",
+        "content": null,
+        "command": null,
+        "evidence": {
+          "kind": "contains",
+          "expected": "[1, 5, 12, 23, 42, 89]",
+          "threshold": null,
+          "metric_key": null,
+          "tolerance": 0.0
+        }
+      },
+      "status": "verified",
+      "attempts": [
+        {
+          "attempt": 1,
+          "exit_code": 0,
+          "stdout": "[1, 5, 12, 23, 42, 89]\n",
+          "stderr": "",
+          "duration": 0.17534470558166504,
+          "verified": true,
+          "reason": "Substring found."
+        }
+      ],
+      "final_evidence": {
+        "step_id": "S2",
+        "attempt": 1,
+        "verified": true,
+        "reason": "Substring found.",
+        "kind": "contains",
+        "actual": "[1, 5, 12, 23, 42, 89]",
+        "expected_summary": "[1, 5, 12, 23, 42, 89]"
+      },
+      "healed": false
+    }
+  ],
+  "ledger_hash": "65d80cef91a97f5028a629bf0033e7179be54ccf85ec212f290deb794cc2e681",
+  "security_blocks": 0,
+  "heal_count": 0
+}

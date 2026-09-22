@@ -1,0 +1,99 @@
+{
+  "id": "OB-AF-1790064963-0b9624",
+  "created_at": "2026-09-22T13:46:07",
+  "kind": "mission_audit",
+  "payload": {
+    "mission_id": "AF-1790064963-0b9624",
+    "objective": "Train a model on Iris and report accuracy as JSON with threshold 0.90",
+    "domain": "ml",
+    "started_at": "2026-09-22T13:46:03",
+    "finished_at": "2026-09-22T13:46:07",
+    "success": true,
+    "steps": [
+      {
+        "step": {
+          "id": "S1",
+          "action": "create_file",
+          "description": "",
+          "file": null,
+          "content": "import json\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score\n\nX, y = load_iris(return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\nclf = RandomForestClassifier(random_state=42)\nclf.fit(X_train, y_train)\npreds = clf.predict(X_test)\n\nacc = float(accuracy_score(y_test, preds))\nprint(json.dumps({\"accuracy\": acc}))",
+          "command": null,
+          "evidence": {
+            "kind": "none",
+            "expected": null,
+            "threshold": null,
+            "metric_key": null,
+            "tolerance": 0.0
+          }
+        },
+        "status": "verified",
+        "attempts": [
+          {
+            "attempt": 1,
+            "exit_code": 0,
+            "stdout": "",
+            "stderr": "",
+            "duration": 0.0,
+            "verified": true,
+            "reason": "Exit code 0 \u2014 step accepted."
+          }
+        ],
+        "final_evidence": {
+          "step_id": "S1",
+          "attempt": 1,
+          "verified": true,
+          "reason": "Exit code 0 \u2014 step accepted.",
+          "kind": "none",
+          "actual": "",
+          "expected_summary": ""
+        },
+        "healed": false
+      },
+      {
+        "step": {
+          "id": "S2",
+          "action": "run_python",
+          "description": "",
+          "file": null,
+          "content": null,
+          "command": null,
+          "evidence": {
+            "kind": "metric_json",
+            "expected": null,
+            "threshold": 0.9,
+            "metric_key": "accuracy",
+            "tolerance": 0.0
+          }
+        },
+        "status": "verified",
+        "attempts": [
+          {
+            "attempt": 1,
+            "exit_code": 0,
+            "stdout": "{\"accuracy\": 1.0}\n",
+            "stderr": "",
+            "duration": 4.026944398880005,
+            "verified": true,
+            "reason": "Metric accuracy=1.0 meets threshold >= 0.9."
+          }
+        ],
+        "final_evidence": {
+          "step_id": "S2",
+          "attempt": 1,
+          "verified": true,
+          "reason": "Metric accuracy=1.0 meets threshold >= 0.9.",
+          "kind": "metric_json",
+          "actual": "1.0",
+          "expected_summary": "accuracy >= 0.9"
+        },
+        "healed": false
+      }
+    ],
+    "ledger_hash": "12f3f11df3b74f55ccb2cfca975f2ab322435c8b7019d824776e2a8f12c98d6e",
+    "security_blocks": 0,
+    "heal_count": 0,
+    "connectivity_at_finish": "online"
+  },
+  "synced": true,
+  "synced_at": "2026-09-22T13:46:07"
+}

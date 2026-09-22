@@ -1,0 +1,101 @@
+{
+  "mission_id": "AF-1790065043-adf806",
+  "objective": "Train Iris model (buggy) \u2014 self-heal expected",
+  "domain": "ml",
+  "started_at": "2026-09-22T13:47:23",
+  "finished_at": "2026-09-22T13:47:27",
+  "success": true,
+  "steps": [
+    {
+      "step": {
+        "id": "S1",
+        "action": "create_file",
+        "description": "Write buggy training script",
+        "file": "train_buggy.py",
+        "content": "import json\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.metrics import accuracy_score\n\nX, y = load_iris(return_X_y=True)\n# BUG: undefined variable X_trian (typo)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)\nclf = LogisticRegression(max_iter=300)\nclf.fit(X_trian, y_train)  # NameError on purpose\npred = clf.predict(X_test)\nprint(json.dumps({\"accuracy\": float(accuracy_score(y_test, pred))}))\n",
+        "command": null,
+        "evidence": {
+          "kind": "none",
+          "expected": null,
+          "threshold": null,
+          "metric_key": null,
+          "tolerance": 0.0
+        }
+      },
+      "status": "verified",
+      "attempts": [
+        {
+          "attempt": 1,
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration": 0.0,
+          "verified": true,
+          "reason": "Exit code 0 \u2014 step accepted."
+        }
+      ],
+      "final_evidence": {
+        "step_id": "S1",
+        "attempt": 1,
+        "verified": true,
+        "reason": "Exit code 0 \u2014 step accepted.",
+        "kind": "none",
+        "actual": "",
+        "expected_summary": ""
+      },
+      "healed": false
+    },
+    {
+      "step": {
+        "id": "S2",
+        "action": "run_python",
+        "description": "Run buggy script (will fail then heal)",
+        "file": "train_buggy.py",
+        "content": null,
+        "command": "python train_buggy.py",
+        "evidence": {
+          "kind": "metric_json",
+          "expected": null,
+          "threshold": 0.85,
+          "metric_key": "accuracy",
+          "tolerance": 0.0
+        }
+      },
+      "status": "verified",
+      "attempts": [
+        {
+          "attempt": 1,
+          "exit_code": 1,
+          "stdout": "",
+          "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\vaish\\OneDrive\\Desktop\\Hackdays\\AegisFlow\\workspace\\train_buggy.py\", line 11, in <module>\n    clf.fit(X_trian, y_train)  # NameError on purpose\n            ^^^^^^^\nNameError: name 'X_trian' is not defined. Did you mean: 'X_train'?\n",
+          "duration": 1.8274149894714355,
+          "verified": false,
+          "reason": "Non-zero exit code 1. stderr: Traceback (most recent call last):\n  File \"C:\\Users\\vaish\\OneDrive\\Desktop\\Hackdays\\AegisFlow\\workspace\\train_buggy.py\", line 11, in <module>\n    clf.fit(X_trian, y_train)  # NameError on purpose\n            ^^^^^^^\nNameError: name 'X_trian' is not defined. Did you mean: 'X_train'?"
+        },
+        {
+          "attempt": 2,
+          "exit_code": 0,
+          "stdout": "{\"accuracy\": 0.9777777777777777}\n",
+          "stderr": "",
+          "duration": 1.9354870319366455,
+          "verified": true,
+          "reason": "Metric accuracy=0.9777777777777777 meets threshold >= 0.85."
+        }
+      ],
+      "final_evidence": {
+        "step_id": "S2",
+        "attempt": 2,
+        "verified": true,
+        "reason": "Metric accuracy=0.9777777777777777 meets threshold >= 0.85.",
+        "kind": "metric_json",
+        "actual": "0.9777777777777777",
+        "expected_summary": "accuracy >= 0.85"
+      },
+      "healed": true
+    }
+  ],
+  "ledger_hash": "9a58e22577d9ac2f8672e8756a811d5896590b039bf3dec005e827c3a3e8b7c3",
+  "security_blocks": 0,
+  "heal_count": 1,
+  "connectivity_at_finish": "online"
+}

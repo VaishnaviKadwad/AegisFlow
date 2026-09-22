@@ -1,0 +1,92 @@
+{
+  "mission_id": "AF-1790057665-975949",
+  "objective": "write a program to find sum of 2 numbers",
+  "domain": "general",
+  "started_at": "2026-09-22T11:44:25",
+  "finished_at": "2026-09-22T11:45:45",
+  "success": false,
+  "steps": [
+    {
+      "step": {
+        "id": "S1",
+        "action": "create_file",
+        "description": "",
+        "file": null,
+        "content": "def add_numbers(a, b):\n    return a + b\n\nif __name__ == '__main__':\n    num1 = 15\n    num2 = 27\n    total = add_numbers(num1, num2)\n    print(f'Sum: {total}')\n",
+        "command": null,
+        "evidence": {
+          "kind": "exit_zero",
+          "expected": null,
+          "threshold": null,
+          "metric_key": null,
+          "tolerance": 0.0
+        }
+      },
+      "status": "verified",
+      "attempts": [
+        {
+          "attempt": 1,
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "duration": 0.0,
+          "verified": true,
+          "reason": "Exit code 0 \u2014 step accepted."
+        }
+      ],
+      "final_evidence": {
+        "step_id": "S1",
+        "attempt": 1,
+        "verified": true,
+        "reason": "Exit code 0 \u2014 step accepted.",
+        "kind": "exit_zero",
+        "actual": "",
+        "expected_summary": ""
+      },
+      "healed": false
+    },
+    {
+      "step": {
+        "id": "S2",
+        "action": "run_python",
+        "description": "",
+        "file": "workspace/sum.py",
+        "content": null,
+        "command": null,
+        "evidence": {
+          "kind": "contains",
+          "expected": "Sum: 42",
+          "threshold": null,
+          "metric_key": null,
+          "tolerance": 0.0
+        }
+      },
+      "status": "rejected",
+      "attempts": [
+        {
+          "attempt": 1,
+          "exit_code": 2,
+          "stdout": "",
+          "stderr": "python: can't open file 'C:\\\\Users\\\\vaish\\\\OneDrive\\\\Desktop\\\\Hackdays\\\\AegisFlow\\\\workspace\\\\workspace\\\\sum.py': [Errno 2] No such file or directory\n",
+          "duration": 0.5769579410552979,
+          "verified": false,
+          "reason": "Non-zero exit code 2. stderr: python: can't open file 'C:\\\\Users\\\\vaish\\\\OneDrive\\\\Desktop\\\\Hackdays\\\\AegisFlow\\\\workspace\\\\workspace\\\\sum.py': [Errno 2] No such file or directory"
+        }
+      ],
+      "final_evidence": {
+        "step_id": "S2",
+        "attempt": 1,
+        "verified": false,
+        "reason": "Non-zero exit code 2. stderr: python: can't open file 'C:\\\\Users\\\\vaish\\\\OneDrive\\\\Desktop\\\\Hackdays\\\\AegisFlow\\\\workspace\\\\workspace\\\\sum.py': [Errno 2] No such file or directory",
+        "kind": "contains",
+        "actual": "",
+        "expected_summary": ""
+      },
+      "healed": false
+    }
+  ],
+  "ledger_hash": "2b3a79d75ebfb696065720fc32b530dbfb1842dce3a1b31e33382b2ab53f1618",
+  "security_blocks": 0,
+  "heal_count": 0,
+  "connectivity_at_finish": "online"
+}

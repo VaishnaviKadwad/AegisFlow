@@ -1,0 +1,1 @@
+numbers = [42, 12, 89, 5, 23, 1]; numbers.sort(); print(numbers)
